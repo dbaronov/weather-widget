@@ -2,6 +2,8 @@ var selectors = {
     widget : '.weather-widget'
 }
 
+selectors.instructions = selectors.widget + '__info-instructions';
+
 selectors.form = selectors.widget + '__form';
 selectors.city = selectors.widget + '__city';
 selectors.country = selectors.widget + '__country';
@@ -26,6 +28,9 @@ weatherWidget.prototype.init = function(el) {
     var that = this;
     that.widget = $(el);
 
+    // Getting current location automatically if possible
+    that.getCurrrentLocation();
+
     that.widget.find(selectors.form).submit( function(e) {
         var city = that.widget.find(selectors.city).val();
         var country = that.widget.find(selectors.country).val();
@@ -33,6 +38,32 @@ weatherWidget.prototype.init = function(el) {
         that.getCurrrentWeather(city, country);
         e.preventDefault();
     });
+
+}
+
+weatherWidget.prototype.getCurrrentLocation = function() {
+    var that = this;
+
+    $.ajax({
+        type: 'post',
+        url: 'http://freegeoip.net/json/',
+        crossDomain: true,
+        dataType: 'jsonp',
+        success: function (data) {
+            if (typeof data != "undefined") {
+                that.setCurrrentLocation(data);
+            }
+        }
+    });
+}
+
+weatherWidget.prototype.setCurrrentLocation = function(data) {
+    var that = this;
+
+    that.widget.find(selectors.city).val(data.city);
+    that.widget.find(selectors.country).val(data.country_name);
+    that.widget.find(selectors.instructions).html('We know where you are!');
+    that.widget.find(selectors.form).submit();
 }
 
 weatherWidget.prototype.getCurrrentWeather = function(city, country) {
@@ -45,7 +76,6 @@ weatherWidget.prototype.getCurrrentWeather = function(city, country) {
             url: that.widget.find(selectors.form).attr('action') + myCity + ',' + myCountry + '&APPID=' +  KEY + '&units=metric',
             data: that.widget.find(selectors.form).serialize(),
             success: function (data) {
-                console.log(data);
                 that.renderWeatherResults(data);
             }
         });
@@ -61,7 +91,6 @@ weatherWidget.prototype.renderWeatherResults = function(data) {
     var humidity = data.main.humidity;
     var descr = data.weather[0].description;
     var windSpeed = data.wind.speed;
-    console.log(data);
 
     if(cod === 200) {
         that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');

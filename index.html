@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Weather @ your current location</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,6 +11,7 @@
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
@@ -21,16 +22,22 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="container">
-            <h1>Weather @ current location</h1>
+        <div class="container weather-widget">
 
-            <div class="alert alert-info" role="info">
-              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Info:</span>
-              Enter your location
+            <div class="row">
+
+            <h1>Weather @ your current location</h1>
+                <div class="col-lg-12">
+                    <div class="weather-widget__info alert alert-info" role="info">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Info:</span>
+                      <span class="weather-widget__info-instructions">Enter your location</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="weather-widget row">
+            <div class="row">
+
                 <form class="weather-widget__form" action="http://api.openweathermap.org/data/2.5/weather?q=" method="post">
                   <div class="col-lg-6">
                     <div class="input-group">
@@ -47,39 +54,28 @@
                       </span>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
-              </form>
+                </form>
 
-                <div class="weather-widget__results col-lg-6">
-                    <div class="weather-widget__results-city"></div>
-                    <div class="weather-widget__results-stats">
-                        <p class="weather-widget__results-stats__descr"></p>
-                        <p class="weather-widget__results-stats__temp"></p>
-                        <p class="weather-widget__results-stats__pressure"></p>
-                        <p class="weather-widget__results-stats__humidity"></p>
-                        <p class="weather-widget__results-stats__wind-speed"></p>
+                <div class="row">
+                    <div class="weather-widget__results-title col-lg-12">
+                        <div class="weather-widget__results-city"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="weather-widget__results">
+                        <div class="weather-widget__results-stats">
+                            <p class="weather-widget__results-stats__descr col-lg-12"></p>
+
+                            <p class="weather-widget__results-stats__temp col-lg-6" ></p>
+                            <p class="weather-widget__results-stats__pressure col-lg-6"></p>
+                            <p class="weather-widget__results-stats__humidity col-lg-6"></p>
+                            <p class="weather-widget__results-stats__wind-speed col-lg-6"></p>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.row -->
 
-<!--             <div class="weather-widget">
-                <form class="weather-widget__form" action="http://api.openweathermap.org/data/2.5/weather?q=" method="post">
-                    City: <input type="text" name="city" class="weather-widget__city">
-                    Country: <input type="text" name="country" class="weather-widget__country">
-
-                    <input type="submit" class="weather-widget__submit btn btn-success">
-                </form>
-
-                <div class="weather-widget__results">
-                    <div class="weather-widget__results-city"></div>
-                    <div class="weather-widget__results-stats">
-                        <p class="weather-widget__results-stats__descr"></p>
-                        <p class="weather-widget__results-stats__temp"></p>
-                        <p class="weather-widget__results-stats__pressure"></p>
-                        <p class="weather-widget__results-stats__humidity"></p>
-                        <p class="weather-widget__results-stats__wind-speed"></p>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
 
