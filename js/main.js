@@ -73,6 +73,8 @@ weatherWidget.prototype.getCurrrentWeather = function(city, country) {
 
         $.ajax({
             type: that.widget.find(selectors.form).attr('method'),
+            crossDomain: true,
+            dataType: 'jsonp',
             url: that.widget.find(selectors.form).attr('action') + myCity + ',' + myCountry + '&APPID=' +  KEY + '&units=metric',
             data: that.widget.find(selectors.form).serialize(),
             success: function (data) {
