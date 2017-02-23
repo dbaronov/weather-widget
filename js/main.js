@@ -18,7 +18,7 @@ selectors.resultsStatsPressure = selectors.widget + '__results-stats__pressure';
 selectors.resultsStatsHumidity = selectors.widget + '__results-stats__humidity';
 selectors.resultsStatsWindSpeed = selectors.widget + '__results-stats__wind-speed';
 
-var KEY = '0f66a9c6343343e42b696ef5a117f46d';
+var KEY = '603b6f7fd7e34d1c869132709172302';
 
 var weatherWidget = function(el) {
     this.init(el);
@@ -48,7 +48,7 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
     $.ajax({
         type: 'post',
-        url: '//ipapi.co/json/',
+        url: 'https://freegeoip.net/json/',
         crossDomain: true,
         dataType: 'jsonp',
         success: function (data) {
@@ -60,27 +60,29 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 }
 
 weatherWidget.prototype.setCurrrentLocation = function(data) {
-    var that = this;
-    var myCity = (data.city) ? data.city : data.latitude + ',' + data.longitude;
+    var that = this
+    data.city = "";
+    var city = (data.city) ? data.city : data.latitude + ',' + data.longitude;
 
-    that.widget.find(selectors.city).val(myCity);
-    that.widget.find(selectors.country).val(data.country);
+    that.widget.find(selectors.city).val(city);
+    that.widget.find(selectors.country).val(data.country_name);
     that.widget.find(selectors.instructions).html('We know where you are!');
     that.widget.find(selectors.form).submit();
 }
 
 weatherWidget.prototype.getCurrrentWeather = function(city, country) {
         var that = this;
-        var myCity = city;
-        var myCountry = country;
+        var city = city;
+        var country = country;
 
         $.ajax({
             crossDomain: true,
-            dataType: 'jsonp',
+            dataType: 'json',
             type: that.widget.find(selectors.form).attr('method'),
-            url: that.widget.find(selectors.form).attr('action') + "q=" + myCity + ',' + myCountry + '&APPID=' +  KEY + '&units=metric',
+            url: that.widget.find(selectors.form).attr('action') + 'key=' +  KEY + "&q=" + city + ',' + country + '&units=metric',
             data: that.widget.find(selectors.form).serialize(),
-            success: function (data) {
+            success: function(data) {
+                console.log(data);
                 that.renderWeatherResults(data);
             }
         });
@@ -89,23 +91,19 @@ weatherWidget.prototype.getCurrrentWeather = function(city, country) {
 
 weatherWidget.prototype.renderWeatherResults = function(data) {
     var that = this;
+    var city = data.location.name;
+    var temperature = data.current.temp_c;
+    var pressure = data.current.pressure_mb;
+    var humidity = data.current.humidity;
+    var descr = data.current.condition.text;
+    var windSpeed = data.current.wind_kph;
 
-    var cod = data.cod;
-    var city = data.name;
-    var temperature = data.main.temp;
-    var pressure = data.main.pressure;
-    var humidity = data.main.humidity;
-    var descr = data.weather[0].description;
-    var windSpeed = data.wind.speed;
-
-    if(cod === 200) {
-        that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');
-        that.widget.find(selectors.resultsDescr).html('Summary : ' +  descr);
-        that.widget.find(selectors.resultsStatsTemp).html('Temperature : ' +  Math.round(temperature) + '&#8451;');
-        that.widget.find(selectors.resultsStatsPressure).html('Pressure : ' +  pressure + 'mm');
-        that.widget.find(selectors.resultsStatsHumidity).html('Humidity : ' +  humidity + '%');
-        that.widget.find(selectors.resultsStatsWindSpeed).html('Wind : ' +  windSpeed + 'mph');
-    }
+    that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');
+    that.widget.find(selectors.resultsDescr).html('Summary : ' +  descr);
+    that.widget.find(selectors.resultsStatsTemp).html('Temperature : ' +  Math.round(temperature) + '&#8451;');
+    that.widget.find(selectors.resultsStatsPressure).html('Pressure : ' +  pressure + 'mm');
+    that.widget.find(selectors.resultsStatsHumidity).html('Humidity : ' +  humidity + '%');
+    that.widget.find(selectors.resultsStatsWindSpeed).html('Wind : ' +  windSpeed + 'mph');
 
 }
 
