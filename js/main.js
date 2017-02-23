@@ -48,7 +48,7 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
     $.ajax({
         type: 'post',
-        url: 'http://freegeoip.net/json/',
+        url: '//freegeoip.net/json/',
         crossDomain: true,
         dataType: 'jsonp',
         success: function (data) {
