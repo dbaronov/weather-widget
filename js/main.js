@@ -61,7 +61,6 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
 weatherWidget.prototype.setCurrrentLocation = function(data) {
     var that = this
-    data.city = "";
     var city = (data.city) ? data.city : data.latitude + ',' + data.longitude;
 
     that.widget.find(selectors.city).val(city);
@@ -82,7 +81,6 @@ weatherWidget.prototype.getCurrrentWeather = function(city, country) {
             url: that.widget.find(selectors.form).attr('action') + 'key=' +  KEY + "&q=" + city + ',' + country + '&units=metric',
             data: that.widget.find(selectors.form).serialize(),
             success: function(data) {
-                console.log(data);
                 that.renderWeatherResults(data);
             }
         });
