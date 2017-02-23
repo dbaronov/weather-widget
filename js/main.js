@@ -35,7 +35,9 @@ weatherWidget.prototype.init = function(el) {
         var city = that.widget.find(selectors.city).val();
         var country = that.widget.find(selectors.country).val();
 
-        that.getCurrrentWeather(city, country);
+        if (city !== "") {
+            that.getCurrrentWeather(city, country);
+        }
         e.preventDefault();
     });
 
@@ -46,7 +48,7 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
     $.ajax({
         type: 'post',
-        url: 'https://freegeoip.net/json/',
+        url: 'http://freegeoip.net/json/',
         crossDomain: true,
         dataType: 'jsonp',
         success: function (data) {
@@ -59,8 +61,9 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
 weatherWidget.prototype.setCurrrentLocation = function(data) {
     var that = this;
+    var myCity = (data.city) ? data.city : data.latitude + ',' + data.longitude;
 
-    that.widget.find(selectors.city).val(data.city);
+    that.widget.find(selectors.city).val(myCity);
     that.widget.find(selectors.country).val(data.country_name);
     that.widget.find(selectors.instructions).html('We know where you are!');
     that.widget.find(selectors.form).submit();
@@ -72,15 +75,16 @@ weatherWidget.prototype.getCurrrentWeather = function(city, country) {
         var myCountry = country;
 
         $.ajax({
-            type: that.widget.find(selectors.form).attr('method'),
             crossDomain: true,
             dataType: 'jsonp',
-            url: that.widget.find(selectors.form).attr('action') + myCity + ',' + myCountry + '&APPID=' +  KEY + '&units=metric',
+            type: that.widget.find(selectors.form).attr('method'),
+            url: that.widget.find(selectors.form).attr('action') + "q=" + myCity + ',' + myCountry + '&APPID=' +  KEY + '&units=metric',
             data: that.widget.find(selectors.form).serialize(),
             success: function (data) {
                 that.renderWeatherResults(data);
             }
         });
+
 }
 
 weatherWidget.prototype.renderWeatherResults = function(data) {
