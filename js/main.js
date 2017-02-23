@@ -48,7 +48,7 @@ weatherWidget.prototype.getCurrrentLocation = function() {
 
     $.ajax({
         type: 'post',
-        url: '//freegeoip.net/json/',
+        url: '//ipapi.co/json/',
         crossDomain: true,
         dataType: 'jsonp',
         success: function (data) {
@@ -64,7 +64,7 @@ weatherWidget.prototype.setCurrrentLocation = function(data) {
     var myCity = (data.city) ? data.city : data.latitude + ',' + data.longitude;
 
     that.widget.find(selectors.city).val(myCity);
-    that.widget.find(selectors.country).val(data.country_name);
+    that.widget.find(selectors.country).val(data.country);
     that.widget.find(selectors.instructions).html('We know where you are!');
     that.widget.find(selectors.form).submit();
 }
