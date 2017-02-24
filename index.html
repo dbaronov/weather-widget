@@ -38,20 +38,27 @@
 
             <div class="row">
 
-                <form class="weather-widget__form" action="https://api.apixu.com/v1/current.json?" method="post">
-                  <div class="col-lg-6">
+                <form class="weather-widget__form" action="https://api.apixu.com/v1/" method="post">
+                  <div class="col-lg-4">
                     <div class="input-group">
                         <span class="input-group-addon">City/GPS:</span>
-                      <input type="text" class="weather-widget__city form-control" name="city" placeholder="enter City here...">
+                            <input type="text" class="weather-widget__city form-control" name="city" placeholder="enter City here...">
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">Forecast:</span>
+                        <input type="text" class="weather-widget__days form-control" name="days" value="3" placeholder="enter Days here... Max: 10">
+                        <span class="input-group-addon">days <sup>(10 max)</sup></span>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-4">
                     <div class="input-group">
                         <span class="input-group-addon">Country:</span>
-                      <input type="text" class="weather-widget__country form-control" name="country" placeholder="enter Country here...">
-                      <span class="input-group-btn">
-                        <input type="submit" role="button" value="Go!" class="weather-widget__submit btn btn-success">
-                      </span>
+                            <input type="text" class="weather-widget__country form-control" name="country" placeholder="enter Country here...">
+                        <span class="input-group-btn">
+                            <input type="submit" role="button" value="Go!" class="weather-widget__submit btn btn-success">
+                        </span>
                     </div><!-- /input-group -->
                   </div><!-- /.col-lg-6 -->
                 </form>
@@ -59,6 +66,7 @@
                 <div class="row">
                     <div class="weather-widget__results-title col-lg-12">
                         <div class="weather-widget__results-city"></div>
+                        <div class="weather-widget__results-today"></div>
                     </div>
                 </div>
 
@@ -72,6 +80,21 @@
                             <p class="weather-widget__results-stats__humidity col-lg-6"></p>
                             <p class="weather-widget__results-stats__wind-speed col-lg-6"></p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="weather-widget__forecast">
+                        <div class="weather-widget__forecast-header">
+                            <ul class="weather-widget__forecast-headers col-lg-12">
+                                <li class="weather-widget__forecast-headers__item col-lg-2">Date</li>
+                                <li class="weather-widget__forecast-headers__item col-lg-4">Summary</li>
+                                <li class="weather-widget__forecast-headers__item col-lg-2">Temperature</li>
+                                <li class="weather-widget__forecast-headers__item col-lg-2">Humidity</li>
+                                <li class="weather-widget__forecast-headers__item col-lg-2">Wind</li>
+                            </ul>
+                        </div>
+                        <div class="weather-widget__forecast-stats"></div>
                     </div>
                 </div>
             </div><!-- /.row -->

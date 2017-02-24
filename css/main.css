@@ -95,21 +95,24 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.weather-widget__forecast-header {
+    margin-top: 20px;
+    padding-top: 30px;
+    overflow: hidden;
+    border-top: 1px dashed black;
+}
 
+.weather-widget__forecast-headers,
+.weather-widget__forecast-stats__items,
+.weather-widget__forecast-stats__items > li > ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.weather-widget__forecast-headers {
+    font-weight: bold;
+}
 
 /* ==========================================================================
    Helper classes
@@ -196,6 +199,7 @@ textarea {
  }
 
  .weather-widget h2,
+ .weather-widget h3,
  .weather-widget__results-stats {
     margin-left: 15px;
     margin-right: 15px;
