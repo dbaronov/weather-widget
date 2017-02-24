@@ -119,7 +119,7 @@ WeatherWidget.prototype.renderWeatherResults = function(data) {
     that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');
     that.widget.find(selectors.resultsToday).html('<h3> Today: </h3>');
     that.widget.find(selectors.resultsDescr).html('Summary : ' +  descr);
-    that.widget.find(selectors.resultsStatsTemp).html('Temperature : ' +  Math.round(temperature) + '&#8451;');
+    that.widget.find(selectors.resultsStatsTemp).html('Temp : ' +  Math.round(temperature) + '&#8451;');
     that.widget.find(selectors.resultsStatsPressure).html('Pressure : ' +  pressure + 'mm');
     that.widget.find(selectors.resultsStatsHumidity).html('Humidity : ' +  humidity + '%');
     that.widget.find(selectors.resultsStatsWindSpeed).html('Wind : ' +  windSpeed + 'mph');

@@ -114,6 +114,15 @@ textarea {
     font-weight: bold;
 }
 
+.weather-widget__forecast .col-lg-2, .weather-widget__forecast .col-lg-4 {
+    width: 20%;
+    float: left;
+}
+
+.weather-widget__form .input-group {
+    margin-bottom: 20px;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
