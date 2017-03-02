@@ -100,9 +100,13 @@ WeatherWidget.prototype.getCurrrentWeather = function(city, days, country) {
 
 WeatherWidget.prototype.convertDate = function(dateString) {
     var date = new Date(dateString);
+    var months = ["January", "February", "March", "April", "May", "June", "July",
+         "August", "September", "October", "November", "December"];
+    var currentMonth = months[date.getMonth()];
+
     if (!isNaN(date.getTime())) {
         // Months use 0 index.
-        return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        return date.getDate() + ' ' + currentMonth + ', ' + date.getFullYear();
     }
 }
 
@@ -119,7 +123,7 @@ WeatherWidget.prototype.renderWeatherResults = function(data) {
     that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');
     that.widget.find(selectors.resultsToday).html('<h3> Today: </h3>');
     that.widget.find(selectors.resultsDescr).html('Summary : ' +  descr);
-    that.widget.find(selectors.resultsStatsTemp).html('Temperature : ' +  Math.round(temperature) + '&#8451;');
+    that.widget.find(selectors.resultsStatsTemp).html('Temp : ' +  Math.round(temperature) + '&#8451;');
     that.widget.find(selectors.resultsStatsPressure).html('Pressure : ' +  pressure + 'mm');
     that.widget.find(selectors.resultsStatsHumidity).html('Humidity : ' +  humidity + '%');
     that.widget.find(selectors.resultsStatsWindSpeed).html('Wind : ' +  windSpeed + 'mph');
