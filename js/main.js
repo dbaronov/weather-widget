@@ -100,9 +100,13 @@ WeatherWidget.prototype.getCurrrentWeather = function(city, days, country) {
 
 WeatherWidget.prototype.convertDate = function(dateString) {
     var date = new Date(dateString);
+    var months = ["January", "February", "March", "April", "May", "June", "July",
+         "August", "September", "October", "November", "December"];
+    var currentMonth = months[date.getMonth()];
+
     if (!isNaN(date.getTime())) {
         // Months use 0 index.
-        return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+        return date.getDate() + ' ' + currentMonth + ', ' + date.getFullYear();
     }
 }
 
