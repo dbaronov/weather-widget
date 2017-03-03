@@ -121,7 +121,6 @@ WeatherWidget.prototype.renderWeatherResults = function(data) {
 
     // Renderring data for today
     that.widget.find(selectors.resultsCity).html('<h2> Weather in ' + city + ' as follows: </h2>');
-    that.widget.find(selectors.resultsToday).html('<h3> Today: </h3>');
     that.widget.find(selectors.resultsDescr).html('Summary : ' +  descr);
     that.widget.find(selectors.resultsStatsTemp).html('Temp : ' +  Math.round(temperature) + '&#8451;');
     that.widget.find(selectors.resultsStatsPressure).html('Pressure : ' +  pressure + 'mm');
@@ -137,7 +136,7 @@ WeatherWidget.prototype.renderWeatherResults = function(data) {
                             + '<ul id="ul-' + index + '">'
                                 + '<li class="col-lg-2">' + date + '</li>'
                                 + '<li class="col-lg-4">' + value.day.condition.text + '</li>'
-                                + '<li class="col-lg-2">' + Math.round(value.day.avgtemp_c) + '&#8451;' + '</li>'
+                                + '<li class="col-lg-2">' + Math.round(value.day.mintemp_c) + ' / ' + Math.round(value.day.maxtemp_c) + '&#8451;' + '</li>'
                                 + '<li class="col-lg-2">' + value.day.avghumidity + '%' + '</li>'
                                 + '<li class="col-lg-2">' + value.day.maxwind_mph + 'mph' + '</li>'
                             + '</ul>'
